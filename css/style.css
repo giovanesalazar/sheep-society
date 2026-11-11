@@ -1,0 +1,366 @@
+/* ===== Variáveis e base ===== */
+:root {
+    --bg: #0a0a0a;
+    --card: #121212;
+    --line: #2a2a2a;
+    --text: #f2f2f2;
+    --mute: #9a9a9a;
+    --silver: #c9ccd1;
+    --verde: #2cff7b;
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #0a0a0a;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+.d {
+    font-family: Rajdhani, "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+}
+
+/* ===== Cabeçalho ===== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5vw;
+    border-bottom: 1px solid var(--line);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.logo small {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: .3em;
+    color: var(--mute);
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+    letter-spacing: .15em;
+}
+
+nav a {
+    color: var(--silver);
+    text-decoration: none;
+    font-family: Rajdhani, "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+    transition: color .3s;    
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+/* ===== Hero ===== */
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 90px 2vw 90px 5vw;         
+    overflow: hidden;
+    background: radial-gradient(ellipse at 70% 40%, #1c1c1c, var(--bg) 65%);
+}
+
+.hero p.k {
+    font-size: 12px;
+    letter-spacing: .3em;
+    color: var(--mute);
+}
+
+h1 {
+    font-size: clamp(44px, 7vw, 84px);
+    line-height: .98;
+    font-weight: 700;
+    letter-spacing: .04em;
+    margin: 18px 0;
+}
+
+.hero p.s {
+    color: var(--mute);
+    max-width: 440px;
+    margin-bottom: 28px;
+}
+
+.hero .ovelha {
+    justify-self: center;            
+    width: 390px;
+    max-width: 100%;
+    height: auto;
+    transform: translateX(-30px);
+}
+
+/* ===== Botões ===== */
+.btn {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 14px 26px;
+    font-size: 12px;
+    letter-spacing: .2em;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: Rajdhani, sans-serif;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--silver);
+    outline-offset: 3px;
+}
+
+/* ===== Títulos de seção ===== */
+h2 {
+    text-align: center;
+    font-size: 34px;
+    letter-spacing: .2em;
+    font-weight: 700;
+    padding-top: 80px;
+}
+
+h2::after {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 1px;
+    background: var(--silver);
+    margin: 14px auto 0;
+}
+
+/* ===== Produtos ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 460px));
+    justify-content: center;
+    gap: 28px;
+    padding: 50px 5vw 90px;
+    align-items: start;
+}
+
+#produtos {
+    border-top: 1px solid var(--line);
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px;
+}
+
+/* caixa da imagem: tamanho fixo, nada vaza */
+.stage {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    place-items: center;
+    background: radial-gradient(circle at 50% 55%, #2a2a2a, #0e0e0e 70%);
+}
+
+.stage img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;        /* antes: contain */
+    object-position: center;
+    display: block;
+}
+
+/* desenho de reserva (SVG): só aparece se a imagem falhar */
+.stage img + svg { display: none; }
+.stage img.erro { display: none; }
+.stage img.erro + svg { display: block; }
+
+.tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    background: #fff;
+    color: #000;
+    font-size: 10px;
+    letter-spacing: .18em;
+    padding: 4px 9px;
+    font-family: Rajdhani, sans-serif;
+    font-weight: 700;
+}
+
+.card h3 {
+    font-size: 24px;
+    letter-spacing: .06em;
+    margin: 20px 0 6px;
+    font-weight: 700;
+}
+
+.card p {
+    color: var(--mute);
+    font-size: 14px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0;
+    color: var(--silver);
+    font-size: 14px;
+}
+
+li {
+    padding: 7px 0;
+    border-top: 1px solid var(--line);
+}
+
+.price {
+    font-family: Rajdhani, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 10px 0 14px;
+    color: var(--verde);
+}
+
+.add {
+    display: block;
+    text-align: center;
+    border: 1px solid var(--silver);
+    color: var(--text);
+    padding: 12px;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-decoration: none;
+    font-family: Rajdhani, sans-serif;
+    font-weight: 700;
+    transition: background .2s, color .2s;
+}
+
+.add:hover {
+    background: #fff;
+    color: #000;
+}
+
+.add:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+/* ===== Chamada final e rodapé ===== */
+.cta {
+    text-align: center;
+    padding: 80px 5vw;
+    border-top: 1px solid var(--line);
+    background: #0e0e0e;
+}
+
+.cta h2 {
+    padding-top: 0;
+    font-size: 38px;
+}
+
+.cta p {
+    color: var(--mute);
+    margin: 18px 0 26px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 24px;
+    padding: 36px 5vw;
+    background: #111111;
+    border-top: 1px solid #1f1f1f;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.feat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #f2f2f2;
+    font-family: Rajdhani, "Arial Narrow", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.feat svg {
+    flex: none;
+}
+
+/* celular: um item embaixo do outro */
+@media (max-width: 780px) {
+  .features {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 28px 6vw;
+  }
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 26px 5vw;
+    font-size: 12px;
+    color: var(--mute);
+    border-top: 1px solid var(--line);
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 780px) {
+  nav { display: none; }
+
+  .hero {
+        grid-template-columns: 1fr;
+        padding: 60px 6vw;
+  }
+
+  .hero .ovelha {
+        justify-self: center;
+        width: 260px;
+        transform: translateX(0);
+  }
+
+  .grid { 
+    grid-template-columns: 1fr; 
+  }
+}
